@@ -5,7 +5,7 @@ export default function (wadoRoot) {
         // Reject because of Quality. (Seems the most sensible out of the options)
         const CodeValueAndCodeSchemeDesignator = `113001%5EDCM`;
 
-        const url = `${wadoRoot}/studies/${StudyInstanceUID}/series/${SeriesInstanceUID}/reject/${CodeValueAndCodeSchemeDesignator}`;
+        const url = `${wadoRoot}/${StudyInstanceUID}/series/${SeriesInstanceUID}/reject/${CodeValueAndCodeSchemeDesignator}`;
 
         const xhr = new XMLHttpRequest();
         xhr.open('POST', url, true);

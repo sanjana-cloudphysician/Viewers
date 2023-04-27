@@ -20,6 +20,24 @@ window.config = {
     thumbnail: 75,
     prefetch: 10,
   },
+  oidc: [
+    {
+      // ~ REQUIRED
+      // Authorization Server URL
+      authority: 'https://accounts.google.com',
+      client_id:
+        '339409550350-0up6pv587cr2e0i92kdbvg26dj46qk27.apps.googleusercontent.com',
+      redirect_uri: '/callback',
+      response_type: 'id_token token',
+      scope:
+        'email profile openid https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/cloud-healthcare', // email profile openid
+      // ~ OPTIONAL
+      post_logout_redirect_uri: '/logout-redirect.html',
+      revoke_uri: 'https://accounts.google.com/o/oauth2/revoke?token=',
+      automaticSilentRenew: true,
+      revokeAccessTokenOnSignout: true,
+    },
+  ],
   // filterQueryParam: false,
   dataSources: [
     {
@@ -27,15 +45,23 @@ window.config = {
       namespace: '@ohif/extension-default.dataSourcesModule.dicomweb',
       sourceName: 'dicomweb',
       configuration: {
-        name: 'aws',
+        name: 'GCP',
         // old server
         // wadoUriRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/wado',
         // qidoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
         // wadoRoot: 'https://server.dcmjs.org/dcm4chee-arc/aets/DCM4CHEE/rs',
         // new server
-        wadoUriRoot: 'https://domvja9iplmyu.cloudfront.net/dicomweb',
-        qidoRoot: 'https://domvja9iplmyu.cloudfront.net/dicomweb',
-        wadoRoot: 'https://domvja9iplmyu.cloudfront.net/dicomweb',
+        // wadoUriRoot: 'https://domvja9iplmyu.cloudfront.net/dicomweb',
+        // qidoRoot: 'https://domvja9iplmyu.cloudfront.net/dicomweb',
+        // wadoRoot: 'https://domvja9iplmyu.cloudfront.net/dicomweb',
+
+        wadoUriRoot:
+          'http://localhost/dicom',
+        qidoRoot:
+          'http://localhost/dicom',
+        wadoRoot:
+          'http://localhost/dicom',
+
         qidoSupportsIncludeField: false,
         supportsReject: false,
         imageRendering: 'wadors',
