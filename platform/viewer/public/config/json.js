@@ -1,71 +1,40 @@
 window.config = {
   routerBasename: '/',
-  enableGoogleCloudAdapter: false,
-  // below flag is for performance reasons, but it might not work for all servers
-  omitQuotationForMultipartRequest: true,
-  showWarningMessageForCrossOrigin: true,
-  showCPUFallbackMessage: true,
-  showLoadingIndicator: true,
-  // This is an array, but we'll only use the first entry for now
-  // oidc: [
-  //   {
-  //     authority: 'https://accounts.google.com',
-  //     client_id:
-  //       '339409550350-0up6pv587cr2e0i92kdbvg26dj46qk27.apps.googleusercontent.com',
-  //     redirect_uri: '/callback',
-  //     response_type: 'id_token token',
-  //     scope:
-  //       'email profile openid https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/cloud-healthcare', // email profile openid
-  //     // ~ OPTIONAL
-  //     post_logout_redirect_uri: '/logout-redirect.html',
-  //     revoke_uri: 'https://accounts.google.com/o/oauth2/revoke?token=',
-  //     automaticSilentRenew: true,
-  //     revokeAccessTokenOnSignout: true,
-
-  //   },
-  //],
   // whiteLabelling: {},
   extensions: [],
   modes: [],
   showStudyList: true,
-  // filterQueryParam: false,
+  // below flag is for performance reasons, but it might not work for all servers
+  // omitQuotationForMultipartRequest: true,
+  // showWarningMessageForCrossOrigin: true,
+  // showCPUFallbackMessage: true,
+  // showLoadingIndicator: true,
   dataSources: [
     {
-      friendlyName: 'dcmjs DICOMWeb Server',
-      namespace: '@ohif/extension-default.dataSourcesModule.dicomweb',
-      sourceName: 'dicomweb',
-      configuration: {
-        name: 'GCP',
-        wadoUriRoot:
-          'http://localhost/dicom',
-        qidoRoot:
-          'http://localhost/dicom',
-        wadoRoot:
-          'http://localhost/dicom',
-        qidoSupportsIncludeField: true,
-        imageRendering: 'wadors',
-        thumbnailRendering: 'wadors',
-        enableStudyLazyLoad: true,
-        supportsFuzzyMatching: true,
-        supportsWildcard: false,
-      },
-    },
-    {
-      friendlyName: 'dicom json',
-      namespace: '@ohif/extension-default.dataSourcesModule.dicomjson',
-      sourceName: 'dicomjson',
-      configuration: {
-        name: 'json',
-      },
-    },
-    {
-      friendlyName: 'dicom local',
-      namespace: '@ohif/extension-default.dataSourcesModule.dicomlocal',
-      sourceName: 'dicomlocal',
-      configuration: {},
-    },
+      provider: 'json',
+      url: '/home/cloud/Viewers/platform/viewer/public/LIDC-IDRI-0001/LIDC-IDRI-0001.json'
+      // name: "My JSON Data Source",
+      // type: "dicomweb",
+      // wadoUriRoot: "http://localhost:3000/dicom-web",
+      // qidoRoot: "http://localhost:3000/dicom-web",
+      // wadoRoot: "http://localhost:3000/dicom-web",
+      // method: 'GET',
+      // qidoSupport: true,
+      // wadoSupport: true,
+      // supportsFuzzyMatching: true,
+      // imageRendering: "wadors",
+      // thumbnailRendering: "wadors",
+      // dataSource: {
+      //   type: "json",
+      //   url: "/home/cloud/Viewers/platform/viewer/public/LIDC-IDRI-0001/LIDC-IDRI-0001.json"
+      // },
+      // requestOptions: {
+      //   headers: {
+      //     Accept: 'application/json',
+      //   },
+      }
   ],
-  defaultDataSourceName: 'dicomweb',
+  defaultDataSource: "My JSON Data Source",
   hotkeys: [
     {
       commandName: 'incrementActiveViewport',
@@ -86,7 +55,7 @@ window.config = {
       keys: ['h'],
     },
     {
-      commandName: 'flipViewportVertical', t
+      commandName: 'flipViewportVertical',
       label: 'Flip Vertically',
       keys: ['v'],
     },
@@ -106,12 +75,7 @@ window.config = {
     //   label: 'Next Series',
     //   keys: ['pageup'],
     // },
-    {
-      commandName: 'setToolActive',
-      commandOptions: { toolName: 'Zoom' },
-      label: 'Zoom',
-      keys: ['z'],
-    },
+    { commandName: 'setZoomTool', label: 'Zoom', keys: ['z'] },
     // ~ Window level presets
     {
       commandName: 'windowLevelPreset1',
